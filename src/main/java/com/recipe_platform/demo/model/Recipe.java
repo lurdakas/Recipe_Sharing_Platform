@@ -1,18 +1,24 @@
 package com.recipe_platform.demo.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
-@Table(name = "Recipes")
+@Table(name = "recipes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
+//@Getter
+//@Setter
 
 public class Recipe {
 
@@ -42,6 +48,25 @@ public class Recipe {
     @Column(name = "servings")
     private int servings;
 
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    private List<Ingredient> ingredients = new ArrayList<>();
 
 
+
+
+
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", instructions='" + instructions + '\'' +
+                ", prep_time=" + prep_time +
+                ", cook_time=" + cook_time +
+                ", servings=" + servings +
+                ", ingredients=" + ingredients +
+                '}';
+    }
 }

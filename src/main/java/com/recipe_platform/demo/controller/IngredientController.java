@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-        import java.util.Optional;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/ingredients_platform")
+@RequestMapping("/api/ingredients")
 public class IngredientController {
 
 
@@ -33,6 +33,7 @@ public class IngredientController {
         }
     }
 
+
     @PostMapping
     public Ingredient createIngredient(@RequestBody Ingredient ingredient){
         return ingredientService.save(ingredient);
@@ -51,6 +52,8 @@ public class IngredientController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteIngredient(@PathVariable Long id) {

@@ -22,7 +22,7 @@ public class BootStrapData implements CommandLineRunner {
     @Override
     public void run(String... args)  {
         System.out.println("hello");
-        System.out.println(recipeRepository.findAll());
+//        System.out.println(recipeRepository.findAll());
 
 
     }

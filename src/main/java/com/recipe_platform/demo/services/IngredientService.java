@@ -13,22 +13,25 @@ public class IngredientService {
 
 
     @Autowired
-    private IngredientRepository ingredientRepositoryt;
+    private IngredientRepository ingredientRepository;
 
     public Iterable<Ingredient> findAll(){
-        return ingredientRepositoryt.findAll();
+        return ingredientRepository.findAll();
     }
 
     public Optional<Ingredient> findById(Long id){
-        return ingredientRepositoryt.findById(id);
+        return ingredientRepository.findById(id);
     }
 
     public Ingredient save(Ingredient ingredient){
-        return ingredientRepositoryt.save(ingredient);
+        return ingredientRepository.save(ingredient);
     }
 
+
     public void deleteById(Long id){
-        ingredientRepositoryt.deleteById(id);
+        ingredientRepository.deleteById(id);
     }
+
+
 
 }

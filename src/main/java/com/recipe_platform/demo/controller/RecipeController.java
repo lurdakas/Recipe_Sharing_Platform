@@ -1,12 +1,15 @@
 package com.recipe_platform.demo.controller;
 
 
+import com.recipe_platform.demo.DTO.RecipeDto;
+import com.recipe_platform.demo.model.Ingredient;
 import com.recipe_platform.demo.model.Recipe;
 import com.recipe_platform.demo.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -33,9 +36,18 @@ public class RecipeController {
         }
     }
 
+//    @PostMapping
+//    public Recipe createRecipe(@RequestBody Recipe recipe){
+//        return recipeService.save(recipe);
+//    }
+
+
     @PostMapping
-    public Recipe createRecipe(@RequestBody Recipe recipe){
-        return recipeService.save(recipe);
+    public ResponseEntity<Recipe>
+    createRecipe(@RequestBody
+                 RecipeDto recipeDto) {
+        Recipe recipe = recipeService.createRecipe(recipeDto);
+        return ResponseEntity.created(URI.create("/recipes/" + recipe.getId())).body(recipe);
     }
 
 
@@ -56,11 +68,14 @@ public class RecipeController {
         }
     }
 
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRecipe(@PathVariable Long id) {
         recipeService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+
 
 
 }
