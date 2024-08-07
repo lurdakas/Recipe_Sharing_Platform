@@ -1,12 +1,14 @@
 package com.recipe_platform.demo.controller;
 
 
+import com.recipe_platform.demo.DTO.IngredientUsageDto;
 import com.recipe_platform.demo.model.Ingredient;
 import com.recipe_platform.demo.services.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,7 +25,7 @@ public class IngredientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Ingredient> getIngredientsbyId(@PathVariable Long id){
+    public ResponseEntity<Ingredient> getIngredientsById(@PathVariable Long id){
         Optional<Ingredient> ingredients = ingredientService.findById(id);
         if(ingredients.isPresent()){
             return ResponseEntity.ok(ingredients.get());
@@ -32,6 +34,12 @@ public class IngredientController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/usage")
+    public List<IngredientUsageDto> getIngredientUsage() {
+        return ingredientService.getIngredientUsage();
+    }
+
 
 
     @PostMapping

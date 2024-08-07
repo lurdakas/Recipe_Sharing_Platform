@@ -13,17 +13,15 @@ import java.util.List;
 @Setter
 
 public class RecipeDto {
-
-    private long id;
     private String title;
     private String description;
     private String instructions;
-
-    private int prep_time;
-    private int cook_time;
+    private int prepTime;
+    private int cookTime;
     private int servings;
     private List<IngredientDto> ingredients;
 
-    // Constructor or setters to populate ingredients
+
+
 
 }

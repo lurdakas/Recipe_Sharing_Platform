@@ -1,11 +1,12 @@
 package com.recipe_platform.demo.model;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -14,10 +15,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
-
-//@Getter
-//@Setter
-
 public class Ingredient {
 
     @Id
@@ -30,21 +27,15 @@ public class Ingredient {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "recipe_id", insertable = false, updatable = false)
-    private long recipe_id;
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "recipe_id")
-    private Recipe recipe;
 
     @Override
     public String toString() {
         return "Ingredient{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", recipe=" + recipe +
                 '}';
     }
 }
